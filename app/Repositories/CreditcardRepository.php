@@ -8,8 +8,33 @@ class CreditcardRepository extends BaseCryptRepository
 {
     protected $repo;
 
-    public function __construct(Creditcard $creditcard)
+    /**
+     * Campos que serão criptografados
+     *
+     * @var array
+     */
+    protected $encryptable = [
+        'cvv',
+        'password',
+    ];
+
+    /**
+     * Model de creditcard
+     *
+     * @return string
+     */
+    public function model()
     {
-        $this->repo = $creditcard;
+        return Creditcard::class;
+    }
+
+    /**
+     * Devolve os campos que serão criptografados
+     *
+     * @return array
+     */
+    public function getEncryptable()
+    {
+        return $this->encryptable;
     }
 }

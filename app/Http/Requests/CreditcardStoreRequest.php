@@ -25,9 +25,10 @@ class CreditcardStoreRequest extends Request
     public function rules()
     {
         return [
-            'number' => 'required',
-            'cvv' => 'string|min:3|max:4',
+            'number'   => 'required',
+            'cvv'      => 'string|min:3|max:4',
             'password' => 'required',
+            'secret'   => 'required|min:3',
         ];
     }
 }

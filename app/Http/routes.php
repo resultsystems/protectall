@@ -16,26 +16,6 @@ Route::get('/', function () {
 
 });
 
-Route::get('/xx', function () {
-
-    $newEncrypter = new \Illuminate\Encryption\Encrypter(md5('teste'), Config::get('app.cipher'));
-    $encrypted = $newEncrypter->encrypt('um texto qualquer');
-    echo $encrypted;
-    echo '<hr>';
-    $newEncrypter = new \Illuminate\Encryption\Encrypter(md5('teste'), Config::get('app.cipher'));
-    echo $decrypted = $newEncrypter->decrypt($encrypted);
-    echo '<hr>';
-
-    Crypt::supported('sdfdf', 'AES-128-CBC');
-
-    echo Crypt::encrypt('teste');
-    echo '<hr>';
-    echo Crypt::decrypt('eyJpdiI6InNIK3ZmcjNHaHVLTGs4TFhDc25mQ0E9PSIsInZhbHVlIjoiV0xCd3k0MkFGMTg0aFB3R203SnpYQT09IiwibWFjIjoiM2QwNTA3YWU2ODI2ZDQ0NGZlZmM5MmUwZmRjZDg1ZmJhNzZiNDYxN2NlZWI5M2Q4NTNjYmEzOGJjMzVmMDRkYyJ9');
-    exit;
-
-    return view('welcome');
-});
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes

@@ -18,6 +18,11 @@ abstract class BaseRepository
      */
     private $app;
 
+    /**
+     * Devolve a model que será criada
+     *
+     * @return string
+     */
     abstract public function model();
 
     public function __construct(App $app)
@@ -26,12 +31,17 @@ abstract class BaseRepository
         $this->makeModel();
     }
 
+    /**
+     * Cria a model
+     *
+     * @return Illuminate\Database\Eloquent\Model
+     */
     public function makeModel()
     {
         $model = $this->app->make($this->model());
 
         if (!$model instanceof Model) {
-            throw new \Exception("Class {$this->model()} must be an instance of Illuminate\\Database\\Eloquent\\Model");
+            throw new Exception("Class {$this->model()} must be an instance of Illuminate\\Database\\Eloquent\\Model");
         }
 
         return $this->model = $model;
