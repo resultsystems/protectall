@@ -46,4 +46,66 @@ abstract class BaseRepository
 
         return $this->model = $model;
     }
+
+    /**
+     * Pega todos os registros
+     *
+     * @return Illuminate\Database\Eloquent\Collection
+     */
+    public function all()
+    {
+        return $this->model
+            ->all();
+    }
+
+    /**
+     * Devolve um item baseado no id :id
+     *
+     * @param  integer $id
+     * @return Illuminate\Database\Eloquent\Model
+     */
+    public function get($id)
+    {
+        return $this->model
+            ->where('id', $id)
+            ->first();
+    }
+
+    /**
+     * Adiciona um novo item
+     *
+     * @param  array  $data
+     * @return Illuminate\Database\Eloquent\Model
+     */
+    public function store(array $data)
+    {
+        return $this->model->save($data);
+    }
+
+    /**
+     * Atualiza um item com os dados :data
+     * baseado no id :id
+     *
+     * @param  array  $data
+     * @param  int $id
+     * @return Illuminate\Database\Eloquent\Model
+     */
+    public function update(array $data, $id)
+    {
+        return $this->model
+            ->where('id', $id)
+            ->update($data);
+    }
+
+    /**
+     * Apaga um item baseado no id :id
+     * @param  int $id
+     * @return int
+     */
+    public function delete($id)
+    {
+        return $this->model
+            ->where('id', $id)
+            ->delete();
+    }
 }

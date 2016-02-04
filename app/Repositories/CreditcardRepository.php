@@ -16,6 +16,7 @@ class CreditcardRepository extends BaseCryptRepository
     protected $encryptable = [
         'cvv',
         'password',
+        'data_crypt',
     ];
 
     /**

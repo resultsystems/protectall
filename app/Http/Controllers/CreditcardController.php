@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreditcardDecryptRequest;
 use App\Http\Requests\CreditcardDeleteRequest;
 use App\Http\Requests\CreditcardStoreRequest;
 use App\Http\Requests\CreditcardUpdateRequest;
@@ -17,28 +18,71 @@ class CreditcardController extends Controller
         $this->repo = $repo;
     }
 
+    /**
+     * Pega todos os cartões do usuário
+     *
+     * @return App\Creditcard;
+     */
     public function all()
     {
         return $this->repo->all();
     }
 
+    /**
+     * Pega o cartão pelo id :id
+     *
+     * @param  string $id
+     * @return App\Creditcard
+     */
     public function get($id)
     {
         return $this->repo->get($id);
     }
 
-    public function store(CreditCardStoreRequest $request)
+    /**
+     * Salva um novo cartão
+     *
+     * @param  CreditcardStoreRequest $request
+     * @return App\Creditcard
+     */
+    public function store(CreditcardStoreRequest $request)
     {
         return $this->repo->store($request->all());
     }
 
-    public function update(CreditCardUpdateRequest $request, $id)
+    /**
+     * Atualiza um o cartão de id :id
+     *
+     * @param  CreditcardUpdateRequest $request
+     * @param  int                  $id
+     * @return App\Creditcard
+     */
+    public function update(CreditcardUpdateRequest $request, $id)
     {
         return $this->repo->update($request->all(), $id);
     }
 
-    public function delete(CreditCardDeleteRequest $request, $id)
+    /**
+     * Apaga um novo cartão pelo id :id
+     *
+     * @param  CreditcardDeleteRequest $request
+     * @param  int                  $id
+     * @return int
+     */
+    public function delete(CreditcardDeleteRequest $request, $id)
     {
         return $this->repo->delete($id);
+    }
+
+    /**
+     * Descriptografa o cartão de id :id
+     *
+     * @param  CreditcardDecryptRequest $request
+     * @param  int                   $id
+     * @return App\Creditcard
+     */
+    public function decrypt(CreditcardDecryptRequest $request, $id)
+    {
+        return $this->repo->getDecrypt($id);
     }
 }
