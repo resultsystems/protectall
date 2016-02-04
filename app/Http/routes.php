@@ -30,6 +30,11 @@ Route::get('/', function () {
 Route::group(['middleware' => ['web', 'auth']], function () {
     Route::group(['prefix' => 'creditcard'], function () {
         Route::get('', 'CreditcardController@all');
+        Route::get('{id}', 'CreditcardController@get');
+        Route::get('{id}/decrypt', 'CreditcardController@decrypt');
+        Route::post('', 'CreditcardController@store');
+        Route::put('{id}', 'CreditcardController@update');
+        Route::delete('{id}', 'CreditcardController@delete');
     });
 });
 

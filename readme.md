@@ -1,3 +1,4 @@
-# Passwords and Crypto text
+# Passwords and Crypt text
 
-Guarda de senhas e textos criptografados
+Guarde suas senhas de cartão de crédito,
+textos etc criptografados.
