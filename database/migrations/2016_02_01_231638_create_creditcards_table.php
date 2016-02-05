@@ -18,14 +18,14 @@ class CreateCreditcardsTable extends Migration
 
             $table->string('number')->unique();
             $table->text('cvv')->nullable();
-            $table->string('password');
+            $table->text('password');
             $table->text('data_crypt')->nullable();
             $table->text('obs')->nullable();
-
-            $table->foreign('user_id')
-                ->references('id')
-                ->on('users');
-
+/*
+$table->foreign('user_id')
+->references('id')
+->on('users');
+ */
             $table->timestamps();
         });
     }

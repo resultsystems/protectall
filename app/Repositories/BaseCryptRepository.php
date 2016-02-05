@@ -2,6 +2,8 @@
 
 namespace App\Repositories;
 
+use Auth;
+use Config;
 use Illuminate\Encryption\Encrypter;
 
 abstract class BaseCryptRepository extends BaseRepository
@@ -56,7 +58,7 @@ abstract class BaseCryptRepository extends BaseRepository
         $encrypter = new Encrypter($key, $cipher);
 
         foreach ($data as $key => $value) {
-            if (in_array($key, $this->getEncryptable())) {
+            if (!empty($value) and in_array($key, $this->getEncryptable())) {
                 $data[$key] = $encrypter->decrypt($value);
             }
         }
@@ -73,7 +75,7 @@ abstract class BaseCryptRepository extends BaseRepository
     {
         return $this->model
             ->where('user_id', Auth::user()->id)
-            ->all();
+            ->get();
     }
 
     /**
@@ -82,9 +84,12 @@ abstract class BaseCryptRepository extends BaseRepository
      * @param  integer $id
      * @return Illuminate\Database\Eloquent\Model
      */
-    public function getDecrypt($id)
+    public function getDecrypt($secret, $id)
     {
-        return $this->decrypt($this->get($id));
+        $data           = $this->get($id)->toArray();
+        $data['secret'] = $secret;
+
+        return $this->decrypt($data);
     }
     /**
      * Devolve um item baseado no id :id
@@ -108,9 +113,11 @@ abstract class BaseCryptRepository extends BaseRepository
      */
     public function store(array $data)
     {
-        $data = $this->encrypt($data);
+        $data            = $this->encrypt($data);
+        $data['user_id'] = Auth::user()->id;
+        $this->model->fill($data);
 
-        return parent::store($data);
+        return $this->model->save();
     }
 
     /**
@@ -123,7 +130,8 @@ abstract class BaseCryptRepository extends BaseRepository
      */
     public function update(array $data, $id)
     {
-        $data = $this->encrypt($data);
+        $data            = $this->encrypt($data);
+        $data['user_id'] = Auth::user()->id;
 
         return $this->model
             ->where('id', $id)

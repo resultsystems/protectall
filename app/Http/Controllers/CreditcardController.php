@@ -83,6 +83,6 @@ class CreditcardController extends Controller
      */
     public function decrypt(CreditcardDecryptRequest $request, $id)
     {
-        return $this->repo->getDecrypt($id);
+        return $this->repo->getDecrypt($request->secret, $id);
     }
 }
