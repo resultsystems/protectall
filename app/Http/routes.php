@@ -35,6 +35,14 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         Route::put('{id}', 'CreditcardController@update');
         Route::delete('{id}', 'CreditcardController@delete');
     });
+    Route::group(['prefix' => 'text'], function () {
+        Route::get('', 'TextController@all');
+        Route::get('{id}', 'TextController@get');
+        Route::post('{id}/decrypt', 'TextController@decrypt');
+        Route::post('', 'TextController@store');
+        Route::put('{id}', 'TextController@update');
+        Route::delete('{id}', 'TextController@delete');
+    });
 });
 
 Route::group(['middleware' => 'web'], function () {

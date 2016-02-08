@@ -16,9 +16,8 @@ class CreateTextsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
 
-            $table->string('title')->unique(); //Title ou username
-            $table->text('text'); //text or password
-            $table->text('data_crypt')->nullable();
+            $table->string('title')->unique();
+            $table->text('text');
             $table->text('obs')->nullable();
 
             $table->timestamps();

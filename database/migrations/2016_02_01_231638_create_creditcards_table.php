@@ -21,12 +21,12 @@ class CreateCreditcardsTable extends Migration
             $table->text('password');
             $table->text('data_crypt')->nullable();
             $table->text('obs')->nullable();
-/*
-$table->foreign('user_id')
-->references('id')
-->on('users');
- */
+
             $table->timestamps();
+
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users');
         });
     }
 
