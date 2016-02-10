@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Creditcard extends Model
+class Text extends Model
 {
     protected $fillable = [
         'user_id',

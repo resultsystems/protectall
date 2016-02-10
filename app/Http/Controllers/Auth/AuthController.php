@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
+use Illuminate\Http\Request;
 use Validator;
 
 class AuthController extends Controller
@@ -41,6 +42,25 @@ class AuthController extends Controller
     }
 
     /**
+     * Get the needed authorization credentials from the request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return array
+     */
+    protected function getCredentials(Request $request)
+    {
+        $credentials = $request->only('email', 'password');
+        $email       = array_get($credentials, 'email');
+
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $credentials['username'] = $email;
+            unset($credentials['email']);
+        }
+
+        return $credentials;
+    }
+
+    /**
      * Get a validator for an incoming registration request.
      *
      * @param  array  $data
@@ -49,8 +69,9 @@ class AuthController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
+            'name'     => 'required|max:255',
+            'email'    => 'required|email|max:255|unique:users',
+            'username' => 'unique:users',
             'password' => 'required|confirmed|min:6',
         ]);
     }
@@ -64,9 +85,9 @@ class AuthController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
+            'name'     => $data['name'],
             'username' => $data['username'],
-            'email' => $data['email'],
+            'email'    => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
     }

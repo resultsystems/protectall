@@ -5,13 +5,17 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
+                <!-- route outlet -->
+                <router-view></router-view>
+
+                <div class="panel-heading">Painel de controle</div>
 
                 <div class="panel-body">
-                    You are logged in!
+                    Navegue pelas opções do menu.
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script src="/js/all.js"></script>
 @endsection
