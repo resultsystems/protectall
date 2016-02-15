@@ -15,6 +15,7 @@ elixir(function(mix) {
     mix.scripts([
         '../../../node_modules/vue/dist/vue.js',
         '../../../node_modules/vue-resource/dist/vue-resource.js',
+        '../../../node_modules/vue-router/dist/vue-router.js',
         'main.js',
     ]);
 });

@@ -40,14 +40,13 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    Laravel
+                    Protect All
                 </a>
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ route('home') }}">Home</a></li>
                     @if (Auth::user())
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -55,10 +54,8 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
-                                    <li><a v-link="{ path: '/foo' }">Go to Foo</a></li>
-                                    <li><a v-link="{ path: '/bar' }">Go to Bar</a></li>
-                                    <li><a href="#creditcard/all">Todos os cartões</a></li>
-                                <li><a href="#creditcard/store"><i class="fa fa-plus-square-o"></i>Novo cartão</a></li>
+                                    <li><a v-link="{ path: '/creditcard/all' }">Todos os cartões</a></li>
+                                <li><a v-link="{ path: '/creditcard/store' }"><i class="fa fa-plus-square-o"></i>Novo cartão</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
@@ -67,8 +64,8 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="#text/all">Todos os textos</a></li>
-                                <li><a href="#text/store"><i class="fa fa-plus-square-o"></i>Novo texto</a></li>
+                                    <li><a v-link="{ path: '/text/all' }">Todos os textos</a></li>
+                                <li><a v-link="{ path: '/text/store' }"><i class="fa fa-plus-square-o"></i>Novo texto</a></li>
                             </ul>
                         </li>
                     @endif
