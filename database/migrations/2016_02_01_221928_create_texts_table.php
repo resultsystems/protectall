@@ -18,7 +18,7 @@ class CreateTextsTable extends Migration
 
             $table->string('title')->unique();
             $table->text('text');
-            $table->text('obs')->nullable();
+            $table->text('note')->nullable();
 
             $table->timestamps();
 
