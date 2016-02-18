@@ -23,6 +23,8 @@ php artisan serve
 ```
 Abre o navegador pelo endereço http://localhost:8080
 
+Ou pode entrar no site http://protectall.emtudo.com/
+
 ## Agradecimento
 Ao Fábio Vedovelli pelas aulas de Vue, sem estas aulas não seria possível concluir este projeto.
 
