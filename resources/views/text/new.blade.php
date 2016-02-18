@@ -14,7 +14,7 @@
                                 <td><textarea class="form-control" rows="6" v-model="text.note" placeholder="Note"></textarea></td>
                             </tr>
                             <tr>
-                                 <td class="text-right">Secret key for crypt **<input class="form-control" type="text" v-model="text.secret" placeholder="Secret key"></td>
+                                 <td class="text-right">Secret key for crypt **<input class="form-control" type="password" v-model="text.secret" placeholder="Secret key"></td>
                             </tr>
                             <tr>
                                  <td class="text-right"><button class="btn btn-primary">Save</button></td>
