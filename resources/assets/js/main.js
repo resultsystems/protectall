@@ -28,21 +28,24 @@ var creditcardList = Vue.extend({
             var self = this;
             this.$http.put('/creditcard/' + creditcard.id, creditcard).then(function(response) {
                 self.creditcards.$set(index, response.data);
-                console.log(data);
-                alert('Atualizado');
+                flash.success('Valores atualizados');
             }, function(response) {
                 showError(response.data);
-                console.log(data);
+                console.log(response.data);
             })
         },
         delete: function(ev, creditcard) {
             ev.preventDefault();
             var self = this;
-            this.$http.delete('/creditcard/' + creditcard.id).then(function(response) {
-                self.creditcards.$remove(creditcard);
-            }, function(response) {
-                showError(response.data);
-            })
+                flash.confirm(confirm);
+            var confirm=function() {
+                this.$http.delete('/creditcard/' + creditcard.id).then(function(response) {
+                    self.creditcards.$remove(creditcard);
+                }, function(response) {
+                    showError(response.data);
+                    console.log(response.data);
+                })                
+            }
         }
     },
     ready: function() {
@@ -78,6 +81,7 @@ var creditcardNew = Vue.extend({
                 self.creditcard = {};
             }, function(response) {
                 showError(response.data);
+                console.log(response.data);
             });
         }
     }
@@ -104,6 +108,7 @@ var textList = Vue.extend({
                 self.texts.$set(index, response.data);
             }, function(response) {
                 showError(response.data);
+                console.log(response.data);
             })
         },
         update: function(ev, index, text) {
@@ -111,11 +116,10 @@ var textList = Vue.extend({
             var self = this;
             this.$http.put('/text/' + text.id, text).then(function(response) {
                 self.texts.$set(index, response.data);
-                console.log(data);
-                alert('Atualizado');
+                flash.success('Valores atualizados');
             }, function(response) {
                 showError(response.data);
-                console.log(data);
+                console.log(response.data);
             })
         },
         delete: function(ev, text) {
@@ -125,6 +129,7 @@ var textList = Vue.extend({
                 self.texts.$remove(text);
             }, function(response) {
                 showError(response.data);
+                console.log(response.data);
             })
         }
     },
@@ -156,6 +161,7 @@ var textNew = Vue.extend({
                 },
                 function(response) {
                     showError(response.data);
+                    console.log(response.data);
                 })
         }
     }

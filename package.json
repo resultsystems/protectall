@@ -17,6 +17,7 @@
     "vue-hot-reload-api": "^1.2.2",
     "vue-html-loader": "^1.1.0",
     "vue-loader": "^8.0.2",
-    "vue-resource": "^0.6.0"
+    "vue-resource": "^0.6.0",
+    "vue-router": "^0.7.11"
   }
 }

@@ -25,10 +25,10 @@ class TextStoreRequest extends Request
     public function rules()
     {
         return [
-            'title'  => 'required',
-            'text'   => 'required',
-            'note'   => 'required',
-            'secret' => 'required|min:3',
+            'title' => 'required',
+            'text' => 'required',
+            'secret' => 'required|min:3|confirmed',
+            'secret_confirmation' => 'required|min:3',
         ];
     }
 }

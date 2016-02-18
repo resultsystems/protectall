@@ -29,11 +29,18 @@
                       <td><input class="form-control" type="text" v-model="creditcard.data_crypt" placeholder="Data"></td>
                       <td><input class="form-control" type="text" v-model="creditcard.note" placeholder="Note"></td>
                  </tr>
-                <tr>
+                <tr v-if="!creditcard.decrypt">
                       <td colspan="2" class="text-right">Secret key</td>
                       <td colspan="2" class="text-right"><input type="password" v-model="creditcard.secret" class="form-control" phoneholder="Your secret key to decrypt"></td>
-                      <td v-if="!creditcard.decrypt"><button class="btn btn-primary" v-on:click="decrypt($event, index, creditcard)">Decrypt</button></td>
-                      <td v-if="creditcard.decrypt"><button class="btn btn-primary" v-on:click="update($event, index, creditcard)">Atualizar</button></td>
+                      <td><button class="btn btn-primary" v-on:click="decrypt($event, index, creditcard)">Decrypt</button></td>
+                      <td><button class="btn btn-danger" v-on:click="delete($event, creditcard)">Apagar</button></td>
+                  </tr>
+                <tr v-if="creditcard.decrypt">
+                      <td class="text-right">Secret key</td>
+                      <td  class="text-right"><input type="password" v-model="creditcard.secret" class="form-control" phoneholder="Your secret key to decrypt"></td>
+                      <td class="text-right">Confirme Secret key</td>
+                      <td class="text-right"><input type="password" v-model="creditcard.secret_confirmation" class="form-control" phoneholder="Your secret key to decrypt"></td>
+                      <td><button class="btn btn-primary" v-on:click="update($event, index, creditcard)">Atualizar</button></td>
                       <td><button class="btn btn-danger" v-on:click="delete($event, creditcard)">Apagar</button></td>
                   </tr>
              </tbody>

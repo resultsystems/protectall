@@ -21,6 +21,12 @@
                 <tr>
                       <td class="text-right"><input type="password" v-model="text.secret" class="form-control" phoneholder="Your secret key to decrypt"></td>
                   </tr>
+                <tr v-if="text.decrypt">
+                      <td class="text-right">Confirme Secret key</td>
+                  </tr>
+                <tr v-if="text.decrypt">
+                      <td class="text-right"><input type="password" v-model="text.secret_confirmation" class="form-control" phoneholder="Your secret key to decrypt"></td>
+                  </tr>
                 <tr>
                       <td v-if="!text.decrypt" class="text-right"><button class="btn btn-primary" v-on:click="decrypt($event, index, text)">Decrypt</button></td>
                   </tr>
@@ -28,7 +34,7 @@
                       <td v-if="text.decrypt" class="text-right"><button class="btn btn-primary" v-on:click="update($event, index, text)">Atualizar</button></td>
                   </tr>
                 <tr>
-                      <td><button class="btn btn-danger" v-on:click="delete($event, text)">Apagar</button></td>
+                      <td class="text-right"><button class="btn btn-danger" v-on:click="delete($event, text)">Apagar</button></td>
                   </tr>
              </tbody>
        </div>
