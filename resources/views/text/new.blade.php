@@ -17,6 +17,9 @@
                                  <td class="text-right">Secret key for crypt **<input class="form-control" type="password" v-model="text.secret" placeholder="Secret key"></td>
                             </tr>
                             <tr>
+                                 <td class="text-right">Confirme Secret key<input class="form-control" type="password" v-model="text.secret_confirmation" placeholder="Secret key"></td>
+                            </tr>
+                            <tr>
                                  <td class="text-right"><button class="btn btn-primary">Save</button></td>
                             </tr>
                             <tr>

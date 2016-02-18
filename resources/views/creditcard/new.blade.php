@@ -23,7 +23,8 @@
                                 <td><input class="form-control" type="text" v-model="creditcard.note" placeholder="Note"></td>
                             </tr>
                             <tr>
-                                 <td colspan="6" class="text-right">Secret key for crypt **<input class="form-control" type="password" v-model="creditcard.secret" placeholder="Secret key"></td>
+                                 <td colspan="3" class="text-right">Secret key for crypt **<input class="form-control" type="password" v-model="creditcard.secret" placeholder="Secret key"></td>
+                                 <td colspan="3" class="text-right">Confirme Secret key<input class="form-control" type="password" v-model="creditcard.secret_confirmation" placeholder="Secret key"></td>
                             </tr>
                             <tr>
                                  <td colspan="6" class="text-right"><button class="btn btn-primary">Save</button></td>
