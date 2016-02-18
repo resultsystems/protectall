@@ -10,6 +10,6 @@ class Text extends Model
         'user_id',
         'title',
         'text',
-        'obs',
+        'note',
     ];
 }

@@ -6,7 +6,7 @@ use App\Creditcard;
 use App\Http\Requests\Request;
 use Auth;
 
-class CreditcardUpdateRequest extends CreditCardStoreRequest
+class CreditcardUpdateRequest extends CreditcardStoreRequest
 {
     /**
      * Determine if the user is authorized to make this request.

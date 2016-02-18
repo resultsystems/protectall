@@ -25,7 +25,7 @@ Route::get('/', ['as' => 'home', 'middleware' => ['web', 'auth'], 'uses' => 'Hom
  */
 
 Route::group(['middleware' => ['web', 'auth']], function () {
-    Route::group(['prefix' => 'creditcard', 'as' => 'creditcard.'], function () {
+    Route::group(['prefix' => 'creditcard/', 'as' => 'creditcard.'], function () {
         Route::get('', ['as' => 'all', 'uses' => 'CreditcardController@all']);
         Route::get('{id}', ['as' => 'get', 'uses' => 'CreditcardController@get']);
         Route::post('{id}/decrypt', ['as' => 'decrypt', 'uses' => 'CreditcardController@decrypt']);
@@ -33,7 +33,7 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         Route::put('{id}', ['as' => 'update', 'uses' => 'CreditcardController@update']);
         Route::delete('{id}', ['as' => 'delete', 'uses' => 'CreditcardController@delete']);
     });
-    Route::group(['prefix' => 'text', 'as' => 'text.'], function () {
+    Route::group(['prefix' => 'text/', 'as' => 'text.'], function () {
         Route::get('', ['as' => 'all', 'uses' => 'TextController@all']);
         Route::get('{id}', ['as' => 'get', 'uses' => 'TextController@get']);
         Route::post('{id}/decrypt', ['as' => 'decrypt', 'uses' => 'TextController@decrypt']);

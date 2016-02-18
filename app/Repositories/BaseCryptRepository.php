@@ -116,8 +116,9 @@ abstract class BaseCryptRepository extends BaseRepository
         $data            = $this->encrypt($data);
         $data['user_id'] = Auth::user()->id;
         $this->model->fill($data);
+        $this->model->save();
 
-        return $this->model->save();
+        return $this->model;
     }
 
     /**
@@ -133,10 +134,14 @@ abstract class BaseCryptRepository extends BaseRepository
         $data            = $this->encrypt($data);
         $data['user_id'] = Auth::user()->id;
 
-        return $this->model
+        $model = $this->model
             ->where('id', $id)
             ->where('user_id', Auth::user()->id)
-            ->update($data);
+            ->first();
+        $model->fill($data);
+        $model->save();
+
+        return $model;
     }
 
     /**

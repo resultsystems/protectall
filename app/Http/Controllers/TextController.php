@@ -25,7 +25,12 @@ class TextController extends Controller
      */
     public function all()
     {
-        return $this->repo->all();
+        $texts = $this->repo->all();
+        foreach ($texts as $key => $value) {
+            $texts[$key]->text = '***';
+        }
+
+        return $texts;
     }
 
     /**
@@ -36,7 +41,12 @@ class TextController extends Controller
      */
     public function get($id)
     {
-        return $this->repo->get($id);
+        $text = $this->repo->get($id);
+        if ($text->count() > 0) {
+            $text->text = '***';
+        }
+
+        return $text;
     }
 
     /**
@@ -47,7 +57,10 @@ class TextController extends Controller
      */
     public function store(TextStoreRequest $request)
     {
-        return $this->repo->store($request->all());
+        $text       = $this->repo->store($request->all());
+        $text->text = '***';
+
+        return $text;
     }
 
     /**
@@ -59,7 +72,10 @@ class TextController extends Controller
      */
     public function update(TextUpdateRequest $request, $id)
     {
-        return $this->repo->update($request->all(), $id);
+        $text       = $this->repo->update($request->all(), $id);
+        $text->text = '***';
+
+        return $text;
     }
 
     /**

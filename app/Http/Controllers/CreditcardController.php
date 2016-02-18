@@ -25,7 +25,14 @@ class CreditcardController extends Controller
      */
     public function all()
     {
-        return $this->repo->all();
+        $creditcards = $this->repo->all();
+        foreach ($creditcards as $key => $value) {
+            $creditcards[$key]->cvv        = '***';
+            $creditcards[$key]->password   = '***';
+            $creditcards[$key]->data_crypt = '***';
+        }
+
+        return $creditcards;
     }
 
     /**
@@ -36,7 +43,14 @@ class CreditcardController extends Controller
      */
     public function get($id)
     {
-        return $this->repo->get($id);
+        $creditcard = $this->repo->get($id);
+        if ($creditcard->count() > 0) {
+            $creditcard->cvv        = '***';
+            $creditcard->password   = '***';
+            $creditcard->data_crypt = '***';
+        }
+
+        return $creditcard;
     }
 
     /**
@@ -47,7 +61,12 @@ class CreditcardController extends Controller
      */
     public function store(CreditcardStoreRequest $request)
     {
-        return $this->repo->store($request->all());
+        $creditcard             = $this->repo->store($request->all());
+        $creditcard->cvv        = '***';
+        $creditcard->password   = '***';
+        $creditcard->data_crypt = '***';
+
+        return $creditcard;
     }
 
     /**
@@ -59,7 +78,12 @@ class CreditcardController extends Controller
      */
     public function update(CreditcardUpdateRequest $request, $id)
     {
-        return $this->repo->update($request->all(), $id);
+        $creditcard             = $this->repo->update($request->all(), $id);
+        $creditcard->cvv        = '***';
+        $creditcard->password   = '***';
+        $creditcard->data_crypt = '***';
+
+        return $creditcard;
     }
 
     /**

@@ -2,22 +2,30 @@
     <div class="panel-heading">List of text</div>
        <div class="panel-body">
            <table class="table table-bordered table-hover table-striped">
-             <thead>
+             <tbody v-for="(index, text) in texts">
                  <tr>
-                     <th>Title</th>
-                     <th>Text</th>
-                     <th>Note</th>
+                     <td v-if="!text.decrypt">Title: @{{ text.title }}</td>
+                     <td v-if="text.decrypt"><input class="form-control" type="text" v-model="text.title" placeholder="Title"></td>
                  </tr>
-             </thead>
-             <tbody v-for="text in texts.all">
                  <tr>
-                     <td>@{{ text.title }}</td>
-                     <td>***</td>
-                     <td>@{{ text.note }}</td>
+                     <td v-if="!text.decrypt">Text: @{{ text.text }}</td>
+                     <td v-if="text.decrypt"><textarea class="form-control" rows="6" v-model="text.text" placeholder="Text for crypt"></textarea></td>
+                 </tr>
+                 <tr>
+                     <td v-if="!text.decrypt">Note: @{{ text.note }}</td>
+                     <td v-if="text.decrypt"><textarea class="form-control" rows="6" v-model="text.note" placeholder="Note"></textarea></td>
                  </tr>
                 <tr>
-                      <td colspan="3"><input type="@{{ text.secret }}"></td>
-                      <td colspan="3"><button class="btn btn-primary" v-on:click="">Decrypt</button></td>
+                      <td class="text-right">Secret key</td>
+                  </tr>
+                <tr>
+                      <td class="text-right"><input type="password" v-model="text.secret" class="form-control" phoneholder="Your secret key to decrypt"></td>
+                  </tr>
+                <tr>
+                      <td v-if="!text.decrypt" class="text-right"><button class="btn btn-primary" v-on:click="decrypt($event, index, text)">Decrypt</button></td>
+                  </tr>
+                <tr>
+                      <td v-if="text.decrypt" class="text-right"><button class="btn btn-primary" v-on:click="update($event, index, text)">Atualizar</button></td>
                   </tr>
              </tbody>
        </div>

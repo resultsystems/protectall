@@ -11,7 +11,7 @@ class Creditcard extends Model
         'number',
         'text',
         'data_crypt',
-        'obs',
+        'note',
         'password',
         'cvv',
         'valid',

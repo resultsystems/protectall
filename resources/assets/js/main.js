@@ -1,26 +1,148 @@
 // Define some components
 var creditcardList = Vue.extend({
-    template: '#creditcardList'
-})
+    template: '#creditcardList',
+    data: function() {
+        return {
+            creditcards: []
+        }
+    },
+    methods: {
+        decrypt: function(ev, index, creditcard) {
+            ev.preventDefault();
+            var self = this;
+            var data = {
+                secret: creditcard.secret
+            };
+            this.$http.post('/creditcard/' + creditcard.id + '/decrypt', data).then(function(response) {
+                var creditcard = response.data;
+                creditcard.decrypt = true;
+                self.creditcards.$set(index, response.data);
+            }, function(response) {
+                console.log('error');
+                console.log(response);
+            })
+        },
 
-var creditcardDecrypt = Vue.extend({
-    template: '#creditcardDecrypt'
+        update: function(ev, index, creditcard) {
+            ev.preventDefault();
+            var self = this;
+            this.$http.put('/creditcard/' + creditcard.id, creditcard).then(function(response) {
+                self.creditcards.$set(index, response.data);
+                console.log(data);
+                alert('Atualizado');
+            }, function(response) {
+                alert('erro');
+                console.log(data);
+            })
+        }
+    },
+    ready: function() {
+        this.$http.get('/creditcard').then(function(response) {
+            this.creditcards = response.data;
+        }, function(response) {
+            console.log('error');
+            console.log(response.data);
+        });
+    }
 })
 
 var creditcardNew = Vue.extend({
-    template: '#creditcardNew'
+    template: '#creditcardNew',
+    data: function() {
+        return {
+            creditcard: {
+                number: '',
+                valid: '',
+                cvv: '',
+                password: '',
+                data_crypt: '',
+                note: ''
+            }
+        }
+    },
+    methods: {
+        creditcardSave: function(ev) {
+            ev.preventDefault();
+
+            this.$http.post('/creditcard', this.creditcard).then(function(response) {
+                alert('cadastrado');
+                console.log(response.data);
+            }, function(response) {
+                alert('erro');
+                console.log(response);
+            })
+        }
+    }
 })
 
+// Define some components
 var textList = Vue.extend({
-    template: '#textList'
-})
+    template: '#textList',
+    data: function() {
+        return {
+            texts: []
+        }
+    },
+    methods: {
+        decrypt: function(ev, index, text) {
+            ev.preventDefault();
+            var self = this;
+            var data = {
+                secret: text.secret
+            };
+            this.$http.post('/text/' + text.id + '/decrypt', data).then(function(response) {
+                var text = response.data;
+                text.decrypt = true;
+                self.texts.$set(index, response.data);
+            }, function(response) {
+                console.log('error');
+                console.log(response);
+            })
+        },
 
-var textDecrypt = Vue.extend({
-    template: '#textDecrypt'
+        update: function(ev, index, text) {
+            ev.preventDefault();
+            var self = this;
+            this.$http.put('/text/' + text.id, text).then(function(response) {
+                self.texts.$set(index, response.data);
+                console.log(data);
+                alert('Atualizado');
+            }, function(response) {
+                alert('erro');
+                console.log(data);
+            })
+        }
+    },
+    ready: function() {
+        this.$http.get('/text').then(function(response) {
+            this.texts = response.data;
+        }, function(response) {
+            console.log('error');
+            console.log(response.data);
+        });
+    }
 })
 
 var textNew = Vue.extend({
-    template: '#textNew'
+    template: '#textNew',
+    data: function() {
+        return {
+            text: {}
+        }
+    },
+    methods: {
+        textSave: function(ev) {
+            ev.preventDefault();
+
+            this.$http.post('/text', this.text).then(function(response) {
+                alert('cadastrado');
+                console.log(response.data);
+            }, function(response) {
+                alert('erro');
+                console.log(response);
+            })
+        }
+    }
 })
 
 var dashboard = Vue.extend({
