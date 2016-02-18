@@ -4,4 +4,4 @@ Guarde suas senhas de cartão de crédito,
 textos etc criptografados.
 
 ## Agradecimento
-Em ao Fábio Vedovelli pelas aulas de Vue, sem estas aulas não seria possível concluir este projeto.
+Ao Fábio Vedovelli pelas aulas de Vue, sem estas aulas não seria possível concluir este projeto.
