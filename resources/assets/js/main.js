@@ -34,6 +34,15 @@ var creditcardList = Vue.extend({
                 showError(response.data);
                 console.log(data);
             })
+        },
+        delete: function(ev, creditcard) {
+            ev.preventDefault();
+            var self = this;
+            this.$http.delete('/creditcard/' + creditcard.id).then(function(response) {
+                self.creditcards.$remove(creditcard);
+            }, function(response) {
+                showError(response.data);
+            })
         }
     },
     ready: function() {
@@ -97,7 +106,6 @@ var textList = Vue.extend({
                 showError(response.data);
             })
         },
-
         update: function(ev, index, text) {
             ev.preventDefault();
             var self = this;
@@ -108,6 +116,15 @@ var textList = Vue.extend({
             }, function(response) {
                 showError(response.data);
                 console.log(data);
+            })
+        },
+        delete: function(ev, text) {
+            ev.preventDefault();
+            var self = this;
+            this.$http.delete('/text/' + text.id).then(function(response) {
+                self.texts.$remove(text);
+            }, function(response) {
+                showError(response.data);
             })
         }
     },

@@ -21,4 +21,9 @@ class TextDeleteRequest extends Request
             ->where('user_id', Auth::user()->id)
             ->exists();
     }
+
+    public function rules()
+    {
+        return [];
+    }
 }

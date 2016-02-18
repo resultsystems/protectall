@@ -30,10 +30,11 @@
                       <td><input class="form-control" type="text" v-model="creditcard.note" placeholder="Note"></td>
                  </tr>
                 <tr>
-                      <td colspan="3" class="text-right">Secret key</td>
+                      <td colspan="2" class="text-right">Secret key</td>
                       <td colspan="2" class="text-right"><input type="password" v-model="creditcard.secret" class="form-control" phoneholder="Your secret key to decrypt"></td>
-                      <td colspan="1" v-if="!creditcard.decrypt"><button class="btn btn-primary" v-on:click="decrypt($event, index, creditcard)">Decrypt</button></td>
-                      <td colspan="1" v-if="creditcard.decrypt"><button class="btn btn-primary" v-on:click="update($event, index, creditcard)">Atualizar</button></td>
+                      <td v-if="!creditcard.decrypt"><button class="btn btn-primary" v-on:click="decrypt($event, index, creditcard)">Decrypt</button></td>
+                      <td v-if="creditcard.decrypt"><button class="btn btn-primary" v-on:click="update($event, index, creditcard)">Atualizar</button></td>
+                      <td><button class="btn btn-danger" v-on:click="delete($event, creditcard)">Apagar</button></td>
                   </tr>
              </tbody>
        </div>

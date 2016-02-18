@@ -27,6 +27,9 @@
                 <tr>
                       <td v-if="text.decrypt" class="text-right"><button class="btn btn-primary" v-on:click="update($event, index, text)">Atualizar</button></td>
                   </tr>
+                <tr>
+                      <td><button class="btn btn-danger" v-on:click="delete($event, text)">Apagar</button></td>
+                  </tr>
              </tbody>
        </div>
     </div>
