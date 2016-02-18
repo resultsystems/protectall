@@ -1,4 +1,4 @@
-# Passwords and Crypt text
+# Protect all
 
 Guarde suas senhas de cartão de crédito,
 textos etc criptografados.
