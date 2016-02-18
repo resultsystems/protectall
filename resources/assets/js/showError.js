@@ -12,7 +12,7 @@ function showError(errors) {
     }
 
     for (var i = qt - 1; i >= 0; i--) {
-        error = error + i + ': ' + errors[i].key + "\n";
+        error = error + errors[i] + "\n";
     };
 
     return flash.error(error);
