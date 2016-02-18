@@ -45,7 +45,10 @@ var creditcardList = Vue.extend({
                     console.log(response.data);
                 })                
             }
-            flash.confirm(confirm(this));
+            var self=this;
+            flash.confirm(function() {
+                confirm(self);
+            });
         }
     },
     ready: function() {
@@ -133,7 +136,10 @@ var textList = Vue.extend({
                     console.log(response.data);
                 })
             }
-            flash.confirm(confirm(this));
+            var self=this;
+            flash.confirm(function() {
+                confirm(self);
+            });
         }
     },
     ready: function() {
