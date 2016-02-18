@@ -18,7 +18,7 @@ var creditcardList = Vue.extend({
                 creditcard.decrypt = true;
                 self.creditcards.$set(index, response.data);
             }, function(response) {
-                console.log('error');
+                showError(response.data);
                 console.log(response);
             })
         },
@@ -31,7 +31,7 @@ var creditcardList = Vue.extend({
                 console.log(data);
                 alert('Atualizado');
             }, function(response) {
-                alert('erro');
+                showError(response.data);
                 console.log(data);
             })
         }
@@ -40,7 +40,7 @@ var creditcardList = Vue.extend({
         this.$http.get('/creditcard').then(function(response) {
             this.creditcards = response.data;
         }, function(response) {
-            console.log('error');
+            showError(response.data);
             console.log(response.data);
         });
     }
@@ -63,14 +63,13 @@ var creditcardNew = Vue.extend({
     methods: {
         creditcardSave: function(ev) {
             ev.preventDefault();
-
+            var self = this;
             this.$http.post('/creditcard', this.creditcard).then(function(response) {
-                alert('cadastrado');
-                console.log(response.data);
+                flash.success('Cadastrado com sucesso');
+                self.creditcard = {};
             }, function(response) {
-                alert('erro');
-                console.log(response);
-            })
+                showError(response.data);
+            });
         }
     }
 })
@@ -95,8 +94,7 @@ var textList = Vue.extend({
                 text.decrypt = true;
                 self.texts.$set(index, response.data);
             }, function(response) {
-                console.log('error');
-                console.log(response);
+                showError(response.data);
             })
         },
 
@@ -108,7 +106,7 @@ var textList = Vue.extend({
                 console.log(data);
                 alert('Atualizado');
             }, function(response) {
-                alert('erro');
+                showError(response.data);
                 console.log(data);
             })
         }
@@ -117,7 +115,7 @@ var textList = Vue.extend({
         this.$http.get('/text').then(function(response) {
             this.texts = response.data;
         }, function(response) {
-            console.log('error');
+            showError(response.data);
             console.log(response.data);
         });
     }
@@ -134,13 +132,14 @@ var textNew = Vue.extend({
         textSave: function(ev) {
             ev.preventDefault();
 
+            var self = this;
             this.$http.post('/text', this.text).then(function(response) {
-                alert('cadastrado');
-                console.log(response.data);
-            }, function(response) {
-                alert('erro');
-                console.log(response);
-            })
+                    flash.success('Cadastrado com sucesso');
+                    self.text = {};
+                },
+                function(response) {
+                    showError(response.data);
+                })
         }
     }
 })
