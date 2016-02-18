@@ -37,7 +37,6 @@ var creditcardList = Vue.extend({
         delete: function(ev, creditcard) {
             ev.preventDefault();
             var self = this;
-            flash.confirm(confirm);
             var confirm=function() {
                 self.$http.delete('/creditcard/' + creditcard.id).then(function(response) {
                     self.creditcards.$remove(creditcard);
@@ -46,6 +45,7 @@ var creditcardList = Vue.extend({
                     console.log(response.data);
                 })                
             }
+            flash.confirm(confirm);
         }
     },
     ready: function() {
