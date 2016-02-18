@@ -28,7 +28,7 @@ var creditcardList = Vue.extend({
             var self = this;
             this.$http.put('/creditcard/' + creditcard.id, creditcard).then(function(response) {
                 self.creditcards.$set(index, response.data);
-                flash.success('Valores atualizados');
+                flash.success('Updated!');
             }, function(response) {
                 showError(response.data);
                 console.log(response.data);
@@ -36,16 +36,16 @@ var creditcardList = Vue.extend({
         },
         delete: function(ev, creditcard) {
             ev.preventDefault();
-            var self = this;
-            var confirm=function() {
+            var confirm=function(self) {
                 self.$http.delete('/creditcard/' + creditcard.id).then(function(response) {
+                    flash.success('Deleted!');
                     self.creditcards.$remove(creditcard);
                 }, function(response) {
                     showError(response.data);
                     console.log(response.data);
                 })                
             }
-            flash.confirm(confirm);
+            flash.confirm(confirm(this));
         }
     },
     ready: function() {
@@ -116,7 +116,7 @@ var textList = Vue.extend({
             var self = this;
             this.$http.put('/text/' + text.id, text).then(function(response) {
                 self.texts.$set(index, response.data);
-                flash.success('Valores atualizados');
+                flash.success('Updated!');
             }, function(response) {
                 showError(response.data);
                 console.log(response.data);
@@ -124,13 +124,16 @@ var textList = Vue.extend({
         },
         delete: function(ev, text) {
             ev.preventDefault();
-            var self = this;
-            this.$http.delete('/text/' + text.id).then(function(response) {
-                self.texts.$remove(text);
-            }, function(response) {
-                showError(response.data);
-                console.log(response.data);
-            })
+            var confirm=function(self) {
+                self.$http.delete('/text/' + text.id).then(function(response) {
+                    flash.success('Deleted!');
+                    self.texts.$remove(text);
+                }, function(response) {
+                    showError(response.data);
+                    console.log(response.data);
+                })
+            }
+            flash.confirm(confirm(this));
         }
     },
     ready: function() {
