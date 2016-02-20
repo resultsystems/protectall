@@ -16,9 +16,11 @@ class CreateTextsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
 
-            $table->string('title')->unique();
+            $table->string('title')->index();
             $table->text('text');
             $table->text('note')->nullable();
+
+            $table->unique(['title', 'user_id']);
 
             $table->timestamps();
 
