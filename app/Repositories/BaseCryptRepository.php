@@ -123,7 +123,7 @@ abstract class BaseCryptRepository extends BaseRepository
 
             return $this->model;
         } catch (Exception $e) {
-            return $e->getMessage();
+            return $this->handleErrors($e->getCode());
         }
     }
 
@@ -152,7 +152,7 @@ abstract class BaseCryptRepository extends BaseRepository
 
             return $model;
         } catch (Exception $e) {
-            return $e->getMessage();
+            return $this->handleErrors($e->getCode());
         }
     }
 
@@ -167,5 +167,22 @@ abstract class BaseCryptRepository extends BaseRepository
             ->where('id', $id)
             ->where('user_id', Auth::user()->id)
             ->delete();
+    }
+
+    /**
+     * Handle errors.
+     *
+     * @param  int $code
+     * @return string
+     */
+    private function handleErrors($code)
+    {
+        switch ($code) {
+            case 1062:
+                return 'Integrity constraint violation, you can\'t repeat the same information';
+
+            default:
+                return 'Internal error';
+        }
     }
 }
