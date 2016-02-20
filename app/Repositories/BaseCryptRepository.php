@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use Auth;
 use Config;
-use Exception;
+use Illuminate\Database\QueryException;
 use Illuminate\Encryption\Encrypter;
 
 abstract class BaseCryptRepository extends BaseRepository
@@ -122,7 +122,7 @@ abstract class BaseCryptRepository extends BaseRepository
             $this->model->save();
 
             return $this->model;
-        } catch (Exception $e) {
+        } catch (QueryException $e) {
             return $this->handleErrors($e->getCode());
         }
     }
@@ -151,7 +151,7 @@ abstract class BaseCryptRepository extends BaseRepository
             $model->save();
 
             return $model;
-        } catch (Exception $e) {
+        } catch (QueryException $e) {
             return $this->handleErrors($e->getCode());
         }
     }
@@ -178,7 +178,7 @@ abstract class BaseCryptRepository extends BaseRepository
     private function handleErrors($code)
     {
         switch ($code) {
-            case 1062:
+            case 23000:
                 return 'Integrity constraint violation, you can\'t repeat the same information';
 
             default:
