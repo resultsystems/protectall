@@ -22,12 +22,12 @@
                      <td>@{{ creditcard.note }}</td>
                  </tr>
                  <tr v-if="creditcard.decrypt">
-                      <td><input class="form-control" type="text" v-model="creditcard.number" placeholder="Number"></td>
-                      <td><input class="form-control" type="text" v-model="creditcard.valid" placeholder="Valid MM/YY"></td>
-                      <td><input class="form-control" type="text" v-model="creditcard.cvv" placeholder="CVV"></td>
-                      <td><input class="form-control" type="text" v-model="creditcard.password" placeholder="Password"></td>
-                      <td><input class="form-control" type="text" v-model="creditcard.data_crypt" placeholder="Data"></td>
-                      <td><input class="form-control" type="text" v-model="creditcard.note" placeholder="Note"></td>
+                      <td><input class="form-control" type="text" v-model="creditcard.number" placeholder="Number" maxlength="20"></td>
+                      <td><input class="form-control" type="text" v-model="creditcard.valid" placeholder="Valid MM/YY" max="5"></td>
+                      <td><input class="form-control" type="text" v-model="creditcard.cvv" placeholder="CVV" maxlength="4"></td>
+                      <td><input class="form-control" type="text" v-model="creditcard.password" placeholder="Password" maxlength="8"></td>
+                      <td><textarea rows="5" class="form-control" v-model="creditcard.data_crypt" placeholder="Data"></textarea></td>
+                      <td><textarea rows="5" class="form-control" v-model="creditcard.note" placeholder="Note"></textarea></td>
                  </tr>
                 <tr v-if="!creditcard.decrypt">
                       <td colspan="2" class="text-right">Secret key</td>

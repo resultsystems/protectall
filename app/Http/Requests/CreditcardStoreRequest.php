@@ -25,9 +25,10 @@ class CreditcardStoreRequest extends Request
     public function rules()
     {
         return [
-            'number' => 'required',
-            'cvv' => 'string|min:3|max:4',
-            'password' => 'required',
+            'number' => 'required|regex:/^[0-9]{12,19}[0-9]$/',
+            'valid' => ['regex:/^(0[1-9]|1[1-2])\/([0-9][0-9])$/'],
+            'cvv' => 'integer|max:9999',
+            'password' => 'integer|max:99999999',
             'secret' => 'required|min:3|confirmed',
             'secret_confirmation' => 'required|min:3',
         ];
