@@ -61,18 +61,18 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
-                                    <li><a v-link="{ path: '/creditcard/all' }">Todos os cartões</a></li>
-                                <li><a v-link="{ path: '/creditcard/store' }"><i class="fa fa-plus-square-o"></i>Novo cartão</a></li>
+                                    <li><a v-link="{ path: '/creditcard/all' }">List all</a></li>
+                                <li><a v-link="{ path: '/creditcard/store' }"><i class="fa fa-plus-square-o"></i>new</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                Texto <span class="caret"></span>
+                                Anything<span class="caret"></span>
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
-                                    <li><a v-link="{ path: '/text/all' }">Todos os textos</a></li>
-                                <li><a v-link="{ path: '/text/store' }"><i class="fa fa-plus-square-o"></i>Novo texto</a></li>
+                                    <li><a v-link="{ path: '/text/all' }">List all</a></li>
+                                <li><a v-link="{ path: '/text/store' }"><i class="fa fa-plus-square-o"></i>new</a></li>
                             </ul>
                         </li>
                     @endif
@@ -83,7 +83,7 @@
                     <!-- Authentication Links -->
                     @if (Auth::guest())
                         <li><a href="{{ url('/login') }}">Login</a></li>
-                        <li><a href="{{ url('/register') }}">Cadastrar</a></li>
+                        <li><a href="{{ url('/register') }}">Register</a></li>
                     @else
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">

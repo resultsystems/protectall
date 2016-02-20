@@ -31,10 +31,10 @@
                       <td v-if="!text.decrypt" class="text-right"><button class="btn btn-primary" v-on:click="decrypt($event, index, text)">Decrypt</button></td>
                   </tr>
                 <tr>
-                      <td v-if="text.decrypt" class="text-right"><button class="btn btn-primary" v-on:click="update($event, index, text)">Atualizar</button></td>
+                      <td v-if="text.decrypt" class="text-right"><button class="btn btn-primary" v-on:click="update($event, index, text)">Update</button></td>
                   </tr>
                 <tr>
-                      <td class="text-right"><button class="btn btn-danger" v-on:click="delete($event, text)">Apagar</button></td>
+                      <td class="text-right"><button class="btn btn-danger" v-on:click="delete($event, text)">Delete</button></td>
                   </tr>
              </tbody>
        </div>
