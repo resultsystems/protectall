@@ -19,7 +19,7 @@ class CreditcardController extends Controller
     }
 
     /**
-     * Pega todos os cartões do usuário
+     * Pega todos os cartões do usuário.
      *
      * @return App\Creditcard;
      */
@@ -27,8 +27,8 @@ class CreditcardController extends Controller
     {
         $creditcards = $this->repo->all();
         foreach ($creditcards as $key => $value) {
-            $creditcards[$key]->cvv        = '***';
-            $creditcards[$key]->password   = '***';
+            $creditcards[$key]->cvv = '***';
+            $creditcards[$key]->password = '***';
             $creditcards[$key]->data_crypt = '***';
         }
 
@@ -36,7 +36,7 @@ class CreditcardController extends Controller
     }
 
     /**
-     * Pega o cartão pelo id :id
+     * Pega o cartão pelo id :id.
      *
      * @param  string $id
      * @return App\Creditcard
@@ -45,8 +45,8 @@ class CreditcardController extends Controller
     {
         $creditcard = $this->repo->get($id);
         if ($creditcard->count() > 0) {
-            $creditcard->cvv        = '***';
-            $creditcard->password   = '***';
+            $creditcard->cvv = '***';
+            $creditcard->password = '***';
             $creditcard->data_crypt = '***';
         }
 
@@ -54,23 +54,23 @@ class CreditcardController extends Controller
     }
 
     /**
-     * Salva um novo cartão
+     * Salva um novo cartão.
      *
      * @param  CreditcardStoreRequest $request
      * @return App\Creditcard
      */
     public function store(CreditcardStoreRequest $request)
     {
-        $creditcard             = $this->repo->store($request->all());
-        $creditcard->cvv        = '***';
-        $creditcard->password   = '***';
-        $creditcard->data_crypt = '***';
+        $creditcard = $this->repo->store($request->all());
+        if ($creditcard) {
+            return $this->replaceEncrypted($creditcard);
+        }
 
-        return $creditcard;
+        return response()->json(['error' => 'Failed on save'], 422);
     }
 
     /**
-     * Atualiza um o cartão de id :id
+     * Atualiza um o cartão de id :id.
      *
      * @param  CreditcardUpdateRequest $request
      * @param  int                  $id
@@ -78,16 +78,18 @@ class CreditcardController extends Controller
      */
     public function update(CreditcardUpdateRequest $request, $id)
     {
-        $creditcard             = $this->repo->update($request->all(), $id);
-        $creditcard->cvv        = '***';
-        $creditcard->password   = '***';
-        $creditcard->data_crypt = '***';
+        $creditcard = $this->repo->update($request->all(), $id);
+        if ($creditcard) {
+            return $this->replaceEncrypted($creditcard);
+        }
 
         return $creditcard;
+
+        return response()->json(['error' => 'Failed on update'], 422);
     }
 
     /**
-     * Apaga um novo cartão pelo id :id
+     * Apaga um novo cartão pelo id :id.
      *
      * @param  CreditcardDeleteRequest $request
      * @param  int                  $id
@@ -99,7 +101,7 @@ class CreditcardController extends Controller
     }
 
     /**
-     * Descriptografa o cartão de id :id
+     * Descriptografa o cartão de id :id.
      *
      * @param  CreditcardDecryptRequest $request
      * @param  int                   $id
@@ -108,5 +110,20 @@ class CreditcardController extends Controller
     public function decrypt(CreditcardDecryptRequest $request, $id)
     {
         return $this->repo->getDecrypt($request->secret, $id);
+    }
+
+    /**
+     * Replace encrypted fields.
+     *
+     * @param  App\Creditcard $creditcard [description]
+     * @return [type]             [description]
+     */
+    private function replaceEncrypted($creditcard)
+    {
+        $creditcard->cvv = '***';
+        $creditcard->password = '***';
+        $creditcard->data_crypt = '***';
+
+        return $creditcard;
     }
 }

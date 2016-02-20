@@ -4,20 +4,21 @@ namespace App\Repositories;
 
 use Auth;
 use Config;
+use Exception;
 use Illuminate\Encryption\Encrypter;
 
 abstract class BaseCryptRepository extends BaseRepository
 {
     /**
      * Devolve os campos  que devem
-     * ser encriptografados
+     * ser encriptografados.
      *
      * @return array
      */
     abstract public function getEncryptable();
 
     /**
-     * Criptografa os dados
+     * Criptografa os dados.
      *
      * @param  array $data
      * @return array
@@ -28,8 +29,8 @@ abstract class BaseCryptRepository extends BaseRepository
             return $data;
         }
 
-        $key       = md5($data['secret'] . '-' . Config::get('app.key'));
-        $cipher    = Config::get('app.cipher');
+        $key = md5($data['secret'].'-'.Config::get('app.key'));
+        $cipher = Config::get('app.cipher');
         $encrypter = new Encrypter($key, $cipher);
 
         foreach ($data as $key => $value) {
@@ -42,7 +43,7 @@ abstract class BaseCryptRepository extends BaseRepository
     }
 
     /**
-     * Descriptografa os dados
+     * Descriptografa os dados.
      *
      * @param  array $data
      * @return array
@@ -53,8 +54,8 @@ abstract class BaseCryptRepository extends BaseRepository
             return $data;
         }
 
-        $key       = md5($data['secret'] . '-' . Config::get('app.key'));
-        $cipher    = Config::get('app.cipher');
+        $key = md5($data['secret'].'-'.Config::get('app.key'));
+        $cipher = Config::get('app.cipher');
         $encrypter = new Encrypter($key, $cipher);
 
         foreach ($data as $key => $value) {
@@ -67,7 +68,7 @@ abstract class BaseCryptRepository extends BaseRepository
     }
 
     /**
-     * Pega todos os registros
+     * Pega todos os registros.
      *
      * @return Illuminate\Database\Eloquent\Collection
      */
@@ -79,22 +80,22 @@ abstract class BaseCryptRepository extends BaseRepository
     }
 
     /**
-     * Devolve um item descriptografado baseado no id :id
+     * Devolve um item descriptografado baseado no id :id.
      *
-     * @param  integer $id
+     * @param  int $id
      * @return Illuminate\Database\Eloquent\Model
      */
     public function getDecrypt($secret, $id)
     {
-        $data           = $this->get($id)->toArray();
+        $data = $this->get($id)->toArray();
         $data['secret'] = $secret;
 
         return $this->decrypt($data);
     }
     /**
-     * Devolve um item baseado no id :id
+     * Devolve um item baseado no id :id.
      *
-     * @param  integer $id
+     * @param  int $id
      * @return Illuminate\Database\Eloquent\Model
      */
     public function get($id)
@@ -106,24 +107,29 @@ abstract class BaseCryptRepository extends BaseRepository
     }
 
     /**
-     * Adiciona um novo item
+     * Adiciona um novo item.
      *
      * @param  array  $data
      * @return Illuminate\Database\Eloquent\Model
      */
     public function store(array $data)
     {
-        $data            = $this->encrypt($data);
+        $data = $this->encrypt($data);
         $data['user_id'] = Auth::user()->id;
         $this->model->fill($data);
-        $this->model->save();
 
-        return $this->model;
+        try {
+            $this->model->save();
+
+            return $this->model;
+        } catch (Exception $e) {
+            return;
+        }
     }
 
     /**
      * Atualiza um item com os dados :data
-     * baseado no id :id
+     * baseado no id :id.
      *
      * @param  array  $data
      * @param  int $id
@@ -131,7 +137,7 @@ abstract class BaseCryptRepository extends BaseRepository
      */
     public function update(array $data, $id)
     {
-        $data            = $this->encrypt($data);
+        $data = $this->encrypt($data);
         $data['user_id'] = Auth::user()->id;
 
         $model = $this->model
@@ -141,11 +147,17 @@ abstract class BaseCryptRepository extends BaseRepository
         $model->fill($data);
         $model->save();
 
-        return $model;
+        try {
+            $model->save();
+
+            return $model;
+        } catch (Exception $e) {
+            return;
+        }
     }
 
     /**
-     * Apaga um item baseado no id :id
+     * Apaga um item baseado no id :id.
      * @param  int $id
      * @return int
      */

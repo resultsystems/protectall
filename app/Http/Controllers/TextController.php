@@ -19,7 +19,7 @@ class TextController extends Controller
     }
 
     /**
-     * Pega todos os cartões do usuário
+     * Pega todos os cartões do usuário.
      *
      * @return App\Text;
      */
@@ -34,7 +34,7 @@ class TextController extends Controller
     }
 
     /**
-     * Pega o cartão pelo id :id
+     * Pega o cartão pelo id :id.
      *
      * @param  string $id
      * @return App\Text
@@ -50,21 +50,25 @@ class TextController extends Controller
     }
 
     /**
-     * Salva um novo cartão
+     * Salva um novo cartão.
      *
      * @param  TextStoreRequest $request
      * @return App\Text
      */
     public function store(TextStoreRequest $request)
     {
-        $text       = $this->repo->store($request->all());
-        $text->text = '***';
+        $text = $this->repo->store($request->all());
+        if ($text) {
+            $text->text = '***';
 
-        return $text;
+            return $text;
+        }
+
+        return response()->json(['error' => 'Failed on save'], 422);
     }
 
     /**
-     * Atualiza um o cartão de id :id
+     * Atualiza um o cartão de id :id.
      *
      * @param  TextUpdateRequest $request
      * @param  int                  $id
@@ -72,14 +76,18 @@ class TextController extends Controller
      */
     public function update(TextUpdateRequest $request, $id)
     {
-        $text       = $this->repo->update($request->all(), $id);
-        $text->text = '***';
+        $text = $this->repo->update($request->all(), $id);
+        if ($text) {
+            $text->text = '***';
 
-        return $text;
+            return $text;
+        }
+
+        return response()->json(['error' => 'Failed on update'], 422);
     }
 
     /**
-     * Apaga um novo cartão pelo id :id
+     * Apaga um novo cartão pelo id :id.
      *
      * @param  TextDeleteRequest $request
      * @param  int                  $id
@@ -91,7 +99,7 @@ class TextController extends Controller
     }
 
     /**
-     * Descriptografa o cartão de id :id
+     * Descriptografa o cartão de id :id.
      *
      * @param  TextDecryptRequest $request
      * @param  int                   $id
