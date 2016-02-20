@@ -19,7 +19,7 @@ class TextController extends Controller
     }
 
     /**
-     * Pega todos os cartões do usuário.
+     * Pega todos os textos do usuário.
      *
      * @return App\Text;
      */
@@ -34,7 +34,7 @@ class TextController extends Controller
     }
 
     /**
-     * Pega o cartão pelo id :id.
+     * Pega o texto pelo id :id.
      *
      * @param  string $id
      * @return App\Text
@@ -50,7 +50,7 @@ class TextController extends Controller
     }
 
     /**
-     * Salva um novo cartão.
+     * Salva um novo texto.
      *
      * @param  TextStoreRequest $request
      * @return App\Text
@@ -68,7 +68,7 @@ class TextController extends Controller
     }
 
     /**
-     * Atualiza um o cartão de id :id.
+     * Atualiza um texto pelo id :id.
      *
      * @param  TextUpdateRequest $request
      * @param  int                  $id
@@ -87,7 +87,7 @@ class TextController extends Controller
     }
 
     /**
-     * Apaga um novo cartão pelo id :id.
+     * Apaga um texto pelo id :id.
      *
      * @param  TextDeleteRequest $request
      * @param  int                  $id
@@ -99,7 +99,7 @@ class TextController extends Controller
     }
 
     /**
-     * Descriptografa o cartão de id :id.
+     * Descriptografa um texto pelo id :id.
      *
      * @param  TextDecryptRequest $request
      * @param  int                   $id

@@ -1,5 +1,5 @@
 <template id="creditcardList">
-    <div class="panel-heading">List of creditcard</div>
+    <div class="panel-heading">List of cards</div>
        <div class="panel-body">
            <table class="table table-bordered table-hover table-striped">
              <thead>

@@ -76,11 +76,11 @@ var creditcardNew = Vue.extend({
         }
     },
     methods: {
-        creditcardSave: function(ev) {
+        save: function(ev) {
             ev.preventDefault();
             var self = this;
             this.$http.post('/creditcard', this.creditcard).then(function(response) {
-                flash.success('Cadastrado com sucesso');
+                flash.success('Success!');
                 self.creditcard = {};
             }, function(response) {
                 showError(response.data);
@@ -160,13 +160,99 @@ var textNew = Vue.extend({
         }
     },
     methods: {
-        textSave: function(ev) {
+        save: function(ev) {
             ev.preventDefault();
 
             var self = this;
             this.$http.post('/text', this.text).then(function(response) {
-                    flash.success('Cadastrado com sucesso');
+                    flash.success('Success!');
                     self.text = {};
+                },
+                function(response) {
+                    showError(response.data);
+                    console.log(response.data);
+                })
+        }
+    }
+})
+
+// Define some components
+var usernameList = Vue.extend({
+    template: '#usernameList',
+    data: function() {
+        return {
+            usernames: []
+        }
+    },
+    methods: {
+        decrypt: function(ev, index, username) {
+            ev.preventDefault();
+            var self = this;
+            var data = {
+                secret: username.secret
+            };
+            this.$http.post('/username/' + username.id + '/decrypt', data).then(function(response) {
+                var username = response.data;
+                username.decrypt = true;
+                self.usernames.$set(index, response.data);
+            }, function(response) {
+                showError(response.data);
+                console.log(response.data);
+            })
+        },
+        update: function(ev, index, username) {
+            ev.preventDefault();
+            var self = this;
+            this.$http.put('/username/' + username.id, username).then(function(response) {
+                self.usernames.$set(index, response.data);
+                flash.success('Updated!');
+            }, function(response) {
+                showError(response.data);
+                console.log(response.data);
+            })
+        },
+        delete: function(ev, username) {
+            ev.preventDefault();
+            var confirm=function(self) {
+                self.$http.delete('/username/' + username.id).then(function(response) {
+                    flash.success('Deleted!');
+                    self.usernames.$remove(username);
+                }, function(response) {
+                    showError(response.data);
+                    console.log(response.data);
+                })
+            }
+            var self=this;
+            flash.confirm(function() {
+                confirm(self);
+            });
+        }
+    },
+    ready: function() {
+        this.$http.get('/username').then(function(response) {
+            this.usernames = response.data;
+        }, function(response) {
+            showError(response.data);
+            console.log(response.data);
+        });
+    }
+})
+
+var usernameNew = Vue.extend({
+    template: '#usernameNew',
+    data: function() {
+        return {
+            username: {}
+        }
+    },
+    methods: {
+        save: function(ev) {
+            ev.preventDefault();
+
+            var self = this;
+            this.$http.post('/username', this.username).then(function(response) {
+                    flash.success('Success!');
+                    self.username = {};
                 },
                 function(response) {
                     showError(response.data);
@@ -207,6 +293,12 @@ router.map({
     },
     '/text/store': {
         component: textNew
+    },
+    '/username/all': {
+        component: usernameList
+    },
+    '/username/store': {
+        component: usernameNew
     },
     '*': {
         component: dashboard

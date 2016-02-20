@@ -70,7 +70,7 @@ class CreditcardController extends Controller
     }
 
     /**
-     * Atualiza um o cartão de id :id.
+     * Atualiza um cartão pelo id :id.
      *
      * @param  CreditcardUpdateRequest $request
      * @param  int                  $id
@@ -87,7 +87,7 @@ class CreditcardController extends Controller
     }
 
     /**
-     * Apaga um novo cartão pelo id :id.
+     * Apaga um cartão pelo id :id.
      *
      * @param  CreditcardDeleteRequest $request
      * @param  int                  $id
@@ -99,7 +99,7 @@ class CreditcardController extends Controller
     }
 
     /**
-     * Descriptografa o cartão de id :id.
+     * Descriptografa um cartão pelo id :id.
      *
      * @param  CreditcardDecryptRequest $request
      * @param  int                   $id

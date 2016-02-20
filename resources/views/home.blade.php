@@ -11,12 +11,16 @@
         </div>
     </div>
 
-    @include("creditcard.list")
     @include("dashboard")
+
+    @include("creditcard.list")
     @include("creditcard.new")
 
     @include("text.list")
     @include("text.new")
+
+    @include("username.list")
+    @include("username.new")
 
 </div>
 <script src="/js/all.js"></script>

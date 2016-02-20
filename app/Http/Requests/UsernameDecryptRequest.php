@@ -3,9 +3,10 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
+use App\Username;
 use Auth;
 
-class TextStoreRequest extends Request
+class UsernameDecryptRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,7 +15,11 @@ class TextStoreRequest extends Request
      */
     public function authorize()
     {
-        return true;
+        $id = $this->route('id');
+
+        return Username::where('id', $id)
+            ->where('user_id', Auth::user()->id)
+            ->exists();
     }
 
     /**
@@ -25,11 +30,7 @@ class TextStoreRequest extends Request
     public function rules()
     {
         return [
-            'title' => 'required|max:255',
-            'text' => 'required|max:1000',
-            'note' => 'max:1000',
-            'secret' => 'required|min:3|max:255|confirmed',
-            'secret_confirmation' => 'required',
+            'secret' => 'required|min:3',
         ];
     }
 }

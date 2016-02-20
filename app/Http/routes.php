@@ -25,6 +25,7 @@ Route::get('/', ['as' => 'home', 'middleware' => ['web', 'auth'], 'uses' => 'Hom
  */
 
 Route::group(['middleware' => ['web', 'auth']], function () {
+    //Creditcard
     Route::group(['prefix' => 'creditcard/', 'as' => 'creditcard.'], function () {
         Route::get('', ['as' => 'all', 'uses' => 'CreditcardController@all']);
         Route::get('{id}', ['as' => 'get', 'uses' => 'CreditcardController@get']);
@@ -33,6 +34,8 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         Route::put('{id}', ['as' => 'update', 'uses' => 'CreditcardController@update']);
         Route::delete('{id}', ['as' => 'delete', 'uses' => 'CreditcardController@delete']);
     });
+
+    //Anything/Text
     Route::group(['prefix' => 'text/', 'as' => 'text.'], function () {
         Route::get('', ['as' => 'all', 'uses' => 'TextController@all']);
         Route::get('{id}', ['as' => 'get', 'uses' => 'TextController@get']);
@@ -40,6 +43,16 @@ Route::group(['middleware' => ['web', 'auth']], function () {
         Route::post('', ['as' => 'store', 'uses' => 'TextController@store']);
         Route::put('{id}', ['as' => 'update', 'uses' => 'TextController@update']);
         Route::delete('{id}', ['as' => 'delete', 'uses' => 'TextController@delete']);
+    });
+
+    //Username
+    Route::group(['prefix' => 'username/', 'as' => 'username.'], function () {
+        Route::get('', ['as' => 'all', 'uses' => 'UsernameController@all']);
+        Route::get('{id}', ['as' => 'get', 'uses' => 'UsernameController@get']);
+        Route::post('{id}/decrypt', ['as' => 'decrypt', 'uses' => 'UsernameController@decrypt']);
+        Route::post('', ['as' => 'store', 'uses' => 'UsernameController@store']);
+        Route::put('{id}', ['as' => 'update', 'uses' => 'UsernameController@update']);
+        Route::delete('{id}', ['as' => 'delete', 'uses' => 'UsernameController@delete']);
     });
 });
 

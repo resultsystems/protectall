@@ -1,7 +1,7 @@
 <template id="creditcardNew">
     <div class="panel-heading">Add creditcard</div>
     <div class="panel-body">
-            <form  v-on:submit="creditcardSave">
+            <form  v-on:submit="save">
             <table class="table table-bordered table-hover table-striped">
                     <thead>
                             <tr>
