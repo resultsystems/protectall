@@ -16,7 +16,7 @@ class CreateCreditcardsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
 
-            $table->string('number');
+            $table->string('number')->unique();
             $table->string('valid')->nullable();
             $table->text('cvv')->nullable();
             $table->text('password');

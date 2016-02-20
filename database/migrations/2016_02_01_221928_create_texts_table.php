@@ -16,7 +16,7 @@ class CreateTextsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
 
-            $table->string('title');
+            $table->string('title')->unique();
             $table->text('text');
             $table->text('note')->nullable();
 
