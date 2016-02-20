@@ -62,11 +62,11 @@ class CreditcardController extends Controller
     public function store(CreditcardStoreRequest $request)
     {
         $creditcard = $this->repo->store($request->all());
-        if ($creditcard) {
+        if (isset($creditcard->id)) {
             return $this->replaceEncrypted($creditcard);
         }
 
-        return response()->json(['error' => 'Failed on save'], 422);
+        return response()->json(['error' => $creditcard], 422);
     }
 
     /**
@@ -79,13 +79,11 @@ class CreditcardController extends Controller
     public function update(CreditcardUpdateRequest $request, $id)
     {
         $creditcard = $this->repo->update($request->all(), $id);
-        if ($creditcard) {
+        if (isset($creditcard->id)) {
             return $this->replaceEncrypted($creditcard);
         }
 
-        return $creditcard;
-
-        return response()->json(['error' => 'Failed on update'], 422);
+        return response()->json(['error' => $creditcard], 422);
     }
 
     /**

@@ -123,7 +123,7 @@ abstract class BaseCryptRepository extends BaseRepository
 
             return $this->model;
         } catch (Exception $e) {
-            return;
+            return $e->getMessage();
         }
     }
 
@@ -152,7 +152,7 @@ abstract class BaseCryptRepository extends BaseRepository
 
             return $model;
         } catch (Exception $e) {
-            return;
+            return $e->getMessage();
         }
     }
 

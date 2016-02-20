@@ -58,13 +58,13 @@ class TextController extends Controller
     public function store(TextStoreRequest $request)
     {
         $text = $this->repo->store($request->all());
-        if ($text) {
+        if (isset($text->id)) {
             $text->text = '***';
 
             return $text;
         }
 
-        return response()->json(['error' => 'Failed on save'], 422);
+        return response()->json(['error' => $text], 422);
     }
 
     /**
@@ -77,13 +77,13 @@ class TextController extends Controller
     public function update(TextUpdateRequest $request, $id)
     {
         $text = $this->repo->update($request->all(), $id);
-        if ($text) {
+        if (isset($text->id)) {
             $text->text = '***';
 
             return $text;
         }
 
-        return response()->json(['error' => 'Failed on update'], 422);
+        return response()->json(['error' => $text], 422);
     }
 
     /**
