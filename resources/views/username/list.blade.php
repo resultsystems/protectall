@@ -12,7 +12,7 @@
                      <td v-if="username.decrypt"><input class="form-control" type="text" v-model="username.username" placeholder="username" maxlength="255"></td>
                  </tr>
                  <tr>
-                     <td v-if="!username.decrypt">Username: @{{ username.password }}</td>
+                     <td v-if="!username.decrypt">Password: @{{ username.password }}</td>
                      <td v-if="username.decrypt"><input class="form-control" type="text" v-model="username.password" placeholder="Password" maxlength="255"></td>
                  </tr>
                  <tr>
