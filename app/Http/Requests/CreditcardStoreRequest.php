@@ -26,7 +26,7 @@ class CreditcardStoreRequest extends Request
     {
         return [
             'number'              => 'required|regex:/^[0-9]{12,19}[0-9]$/',
-            'valid'               => ['regex:/^(0[1-9]|1[0-2])\/([0-9][0-9])$/'],
+            'valid'               => ['regex:/^(0[1-9]|1[0-2])\/(1[6-9]|2[0-9])$/'],
             'cvv'                 => 'regex:/[0-9]{3,4}/',
             'note'                => 'max:1000',
             'data_crypt'          => 'max:1000',
