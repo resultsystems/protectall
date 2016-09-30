@@ -5,15 +5,10 @@ textos etc criptografados.
 
 ## Instalação
 ```
-git clone https://github.com/resultsystems/protectall
-cd protectall
-composer install
-npm install
-cp .env.example .env
+composer create-project --prefer-dist resultsystems/protectall protectall
 ```
 Edite o arquivo `.env` e adicione seus dados de banco de dados
 ```
-php artisan key:generate
 php artisan migrate
 ```
 
