@@ -20,9 +20,8 @@ php artisan serve
 Abre o navegador pelo endereço http://localhost:8000
 
 ## Configurar um servidor
-[Como configurar um servidor](https://www.youtube.com/watch?v=0EM-vRh1n10)
-
-Servidor que eu recomendo [Digital Ocean](https://goo.gl/DMgK38)
+  - [Como configurar um servidor](https://www.youtube.com/watch?v=0EM-vRh1n10)
+  - Servidor que eu recomendo [Digital Ocean](https://goo.gl/DMgK38)
 
 ## Agradecimentos
 Ao Fábio Vedovelli pelas aulas de Vue, sem estas aulas não seria possível concluir este projeto.
