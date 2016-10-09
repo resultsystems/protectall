@@ -1,6 +1,6 @@
 <?php
 
-Route::get('/', ['as' => 'home', 'middleware' => ['web', 'auth'], 'uses' => 'HomeController@index']);
+Route::get('/', ['as' => 'home', 'middleware' => ['web', 'auth', 'verifyTwoAuthenticate'], 'uses' => 'HomeController@index']);
 
 Route::group(['middleware' => ['web', 'auth']], function () {
     //Two Authenticate

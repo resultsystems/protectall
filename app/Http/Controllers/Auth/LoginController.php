@@ -24,7 +24,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = '/two_authenticate';
     /**
      * Create a new controller instance.
      *
@@ -73,5 +73,18 @@ class LoginController extends Controller
         $user->save();
 
         return redirect('/');
+    }
+
+    /**
+     * The user has been authenticated.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  mixed  $user
+     * @return mixed
+     */
+    protected function authenticated(Request $request, $user)
+    {
+        $user->two_authenticate_until = null;
+        $user->save();
     }
 }

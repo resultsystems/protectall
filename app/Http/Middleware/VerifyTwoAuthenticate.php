@@ -21,7 +21,11 @@ class VerifyTwoAuthenticate
         }
 
         if (!$request->user()->hasTwoAuthenticate()) {
-            return response('Unauthorized.', 401);
+            if ($request->ajax() || $request->wantsJson()) {
+                return response('Unauthorized.', 401);
+            } else {
+                return redirect()->guest('/two_authenticate');
+            }
         }
 
         return $next($request);
