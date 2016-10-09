@@ -29,9 +29,9 @@ Se você quer ativar a autenticação em duas etapas, edite o arquivo `.env`, e 
 ```
 AUTHY_KEY=(sua chave)
 AUTHY_URL=http://sandbox-api.authy.com
-AUTHY_ACTIVATE=false
+AUTHY_ACTIVED=false
 ```
-Ative informando  `AUTHY_ACTIVATE=true`, coloque sua chave secreta e a URL do authy, ou deixa a mesma para testes em sandbox.
+Ative informando  `AUTHY_ACTIVED=true`, coloque sua chave secreta e a URL do authy, ou deixa a mesma para testes em sandbox.
 
 
 ## Agradecimentos
