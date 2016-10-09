@@ -54,7 +54,7 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    @if (Auth::user())
+                    @if (Auth::user() && (!Auth::user()->two_authenticate || Session::get('axuth.two.authenticate')))
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                 Creditcard <span class="caret"></span>
@@ -101,6 +101,11 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
+                                @if(Auth::user()->two_authenticate)
+                                    <li><a href="{{ url('/two_authenticate/deactivate') }}"><i class="fa fa-btn fa-check"></i>Desativar two Authenticate</a></li>
+                               @else
+                                    <li><a href="{{ url('/two_authenticate/activate') }}"><i class="fa fa-btn fa-check"></i>Ativar two Authenticate</a></li>
+                                @endif
                                 <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                             </ul>
                         </li>
