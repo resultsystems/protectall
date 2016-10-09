@@ -54,7 +54,7 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    @if (Auth::user() && (!Auth::user()->two_authenticate || Session::get('auth.two.authenticate')))
+                    @if (Auth::user() && Auth::user()->hasTwoAuthenticate())
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                 Creditcard <span class="caret"></span>

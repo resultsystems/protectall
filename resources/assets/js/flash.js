@@ -1,4 +1,4 @@
-var flash = {
+var alert = {
     /**
      * "Metodo" para exibir mensagem de erro
      * @param  string text

@@ -3,7 +3,6 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Session;
 
 class VerifyTwoAuthenticate
 {
@@ -21,7 +20,7 @@ class VerifyTwoAuthenticate
             return $next($request);
         }
 
-        if (!Session::get('auth.two.authenticate')) {
+        if (!$request->user()->hasTwoAuthenticate()) {
             return response('Unauthorized.', 401);
         }
 

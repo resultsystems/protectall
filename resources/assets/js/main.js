@@ -28,7 +28,7 @@ var creditcardList = Vue.extend({
             var self = this;
             this.$http.put('/creditcard/' + creditcard.id, creditcard).then(function(response) {
                 self.creditcards.$set(index, response.data);
-                flash.success('Updated!');
+                alert.success('Updated!');
             }, function(response) {
                 showError(response.data);
                 console.log(response.data);
@@ -38,7 +38,7 @@ var creditcardList = Vue.extend({
             ev.preventDefault();
             var confirm=function(self) {
                 self.$http.delete('/creditcard/' + creditcard.id).then(function(response) {
-                    flash.success('Deleted!');
+                    alert.success('Deleted!');
                     self.creditcards.$remove(creditcard);
                 }, function(response) {
                     showError(response.data);
@@ -46,7 +46,7 @@ var creditcardList = Vue.extend({
                 })                
             }
             var self=this;
-            flash.confirm(function() {
+            alert.confirm(function() {
                 confirm(self);
             });
         }
@@ -80,7 +80,7 @@ var creditcardNew = Vue.extend({
             ev.preventDefault();
             var self = this;
             this.$http.post('/creditcard', this.creditcard).then(function(response) {
-                flash.success('Success!');
+                alert.success('Success!');
                 self.creditcard = {};
             }, function(response) {
                 showError(response.data);
@@ -119,7 +119,7 @@ var textList = Vue.extend({
             var self = this;
             this.$http.put('/text/' + text.id, text).then(function(response) {
                 self.texts.$set(index, response.data);
-                flash.success('Updated!');
+                alert.success('Updated!');
             }, function(response) {
                 showError(response.data);
                 console.log(response.data);
@@ -129,7 +129,7 @@ var textList = Vue.extend({
             ev.preventDefault();
             var confirm=function(self) {
                 self.$http.delete('/text/' + text.id).then(function(response) {
-                    flash.success('Deleted!');
+                    alert.success('Deleted!');
                     self.texts.$remove(text);
                 }, function(response) {
                     showError(response.data);
@@ -137,7 +137,7 @@ var textList = Vue.extend({
                 })
             }
             var self=this;
-            flash.confirm(function() {
+            alert.confirm(function() {
                 confirm(self);
             });
         }
@@ -165,7 +165,7 @@ var textNew = Vue.extend({
 
             var self = this;
             this.$http.post('/text', this.text).then(function(response) {
-                    flash.success('Success!');
+                    alert.success('Success!');
                     self.text = {};
                 },
                 function(response) {
@@ -205,7 +205,7 @@ var usernameList = Vue.extend({
             var self = this;
             this.$http.put('/username/' + username.id, username).then(function(response) {
                 self.usernames.$set(index, response.data);
-                flash.success('Updated!');
+                alert.success('Updated!');
             }, function(response) {
                 showError(response.data);
                 console.log(response.data);
@@ -215,7 +215,7 @@ var usernameList = Vue.extend({
             ev.preventDefault();
             var confirm=function(self) {
                 self.$http.delete('/username/' + username.id).then(function(response) {
-                    flash.success('Deleted!');
+                    alert.success('Deleted!');
                     self.usernames.$remove(username);
                 }, function(response) {
                     showError(response.data);
@@ -223,7 +223,7 @@ var usernameList = Vue.extend({
                 })
             }
             var self=this;
-            flash.confirm(function() {
+            alert.confirm(function() {
                 confirm(self);
             });
         }
@@ -251,7 +251,7 @@ var usernameNew = Vue.extend({
 
             var self = this;
             this.$http.post('/username', this.username).then(function(response) {
-                    flash.success('Success!');
+                    alert.success('Success!');
                     self.username = {};
                 },
                 function(response) {

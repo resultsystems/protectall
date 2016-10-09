@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
@@ -43,7 +44,7 @@ class LoginController extends Controller
     protected function credentials(Request $request)
     {
         $credentials = $request->only('email', 'password');
-        $email       = array_get($credentials, 'email');
+        $email = array_get($credentials, 'email');
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $credentials['username'] = $email;
@@ -51,5 +52,26 @@ class LoginController extends Controller
         }
 
         return $credentials;
+    }
+
+    /**
+     * Log the user out of the application.
+     *
+     * @param  Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function logout(Request $request)
+    {
+        $user = $request->user();
+
+        $this->guard()->logout();
+
+        $request->session()->flush();
+
+        $request->session()->regenerate();
+        $user->two_authenticate_until = null;
+        $user->save();
+
+        return redirect('/');
     }
 }

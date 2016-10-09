@@ -15,6 +15,7 @@ class AddTwoAuthenticateUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->boolean('two_authenticate')->default(0);
+            $table->datetime('two_authenticate_until')->nullable();
         });
     }
 
@@ -27,6 +28,7 @@ class AddTwoAuthenticateUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('two_authenticate');
+            $table->dropColumn('two_authenticate_until');
         });
     }
 }

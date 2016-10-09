@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Auth;
 use Authy\AuthyApi;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Session;
 
 class TwoAuthenticateController extends Controller
 {
@@ -32,7 +32,8 @@ class TwoAuthenticateController extends Controller
 
         try {
             if ($authy->verifyToken($user->id(), $request->token)) {
-                Session::put('auth.two.authenticate', true);
+                $login->two_authenticate_until = Carbon::now()->addDays(5);
+                $login->save();
             }
 
             return redirect('/');
@@ -51,8 +52,9 @@ class TwoAuthenticateController extends Controller
 
     public function deactivate()
     {
-        Session::put('auth.two.authenticate', false);
-        Auth::user()->update(['two_authenticate' => false]);
+        Auth::user()->update([
+            'two_authenticate'       => false,
+            'two_authenticate_until' => null, ]);
 
         return redirect('/');
     }

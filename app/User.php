@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -15,6 +16,7 @@ class User extends Authenticatable
         'name', 'email', 'password', 'username',
         'phone', 'country_code',
         'two_authenticate',
+        'two_authenticate_until',
     ];
 
     /**
@@ -25,4 +27,25 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    protected $dates = [
+        'two_authenticate_until',
+    ];
+    protected $casts = [
+        'two_authenticate',
+    ];
+
+    public function hasTwoAuthenticate()
+    {
+        if (!$this->two_authenticate) {
+            return true;
+        }
+
+        if (!$this->two_authenticate_until) {
+            return false;
+        }
+        $now = Carbon::now();
+
+        return $now->lte($this->two_authenticate_until);
+    }
 }
