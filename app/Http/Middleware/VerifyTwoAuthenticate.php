@@ -18,7 +18,7 @@ class VerifyTwoAuthenticate
     public function handle($request, Closure $next, $guard = null)
     {
         if (!$request->user()->two_authenticate) {
-            return redirect()->guest('/');
+            return $next($request);
         }
 
         if (!Session::get('auth.two.authenticate')) {
