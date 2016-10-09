@@ -101,10 +101,12 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
-                                @if(Auth::user()->two_authenticate)
-                                    <li><a href="{{ url('/two_authenticate/deactivate') }}"><i class="fa fa-btn fa-check"></i>Desativar two factor authentication</a></li>
-                               @else
-                                    <li><a href="{{ url('/two_authenticate/activate') }}"><i class="fa fa-btn fa-check"></i>Ativar two factor authentication</a></li>
+                                @if(env('AUTHY_ACTIVED', false))
+                                    @if(Auth::user()->two_authenticate)
+                                        <li><a href="{{ url('/two_authenticate/deactivate') }}"><i class="fa fa-btn fa-check"></i>Desativar two factor authentication</a></li>
+                                   @else
+                                        <li><a href="{{ url('/two_authenticate/activate') }}"><i class="fa fa-btn fa-check"></i>Ativar two factor authentication</a></li>
+                                    @endif
                                 @endif
                                 <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                             </ul>

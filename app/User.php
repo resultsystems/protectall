@@ -37,6 +37,9 @@ class User extends Authenticatable
 
     public function hasTwoAuthenticate()
     {
+        if (!env('AUTHY_ACTIVED', false)) {
+            return true;
+        }
         if (!$this->two_authenticate) {
             return true;
         }
