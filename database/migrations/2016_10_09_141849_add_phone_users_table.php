@@ -13,8 +13,8 @@ class AddPhoneUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('country_code', 4)->nullable();
-            $table->string('phone', 13)->nullable();
+            $table->string('country_code', 4)->after('username')->nullable();
+            $table->string('phone', 13)->after('country_code')->nullable();
         });
     }
 
