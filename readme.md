@@ -33,6 +33,8 @@ AUTHY_ACTIVED=false
 ```
 Ative informando  `AUTHY_ACTIVED=true`, coloque sua chave secreta e a URL do authy, ou deixa a mesma para testes em sandbox.
 
+Mais informações acesse: [Authy](http://www.authy.com)
+
 
 ## Agradecimentos
 Ao Fábio Vedovelli pelas aulas de Vue, sem estas aulas não seria possível concluir este projeto.
