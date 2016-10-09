@@ -12,7 +12,7 @@ class TwoAuthenticateController extends Controller
 {
     public function index()
     {
-        return view("auth.twoauthenticate");
+        return view('auth.twoauthenticate');
     }
 
     public function store(Request $request)
@@ -20,16 +20,26 @@ class TwoAuthenticateController extends Controller
         $authy = new AuthyApi(env('AUTHY_KEY', null), env('AUTHY_URL'));
 
         $login = $request->user();
-        $user  = $authy->registerUser($login->email, $login->phone, $login->country_code);
+        try {
+            $user = $authy->registerUser($login->email, $login->phone, $login->country_code);
+        } catch (\Exception $e) {
+            return redirect('/two_authenticate');
+        }
+
         if (!$user->ok()) {
+            return redirect('/two_authenticate');
+        }
+
+        try {
+            if ($authy->verifyToken($user->id(), $request->token)) {
+                Session::put('auth.two.authenticate', true);
+            }
+
             return redirect('/');
+        } catch (\Exception $e) {
         }
 
-        if ($authy->verifyToken($user->id(), $request->token)) {
-            Session::put('auth.two.authenticate', true);
-        }
-
-        return redirect('/');
+        return redirect('/two_authenticate');
     }
 
     public function activate()
